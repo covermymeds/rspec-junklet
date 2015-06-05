@@ -109,8 +109,9 @@ junk 17 - return 17 bytes of junk data
 ### symbol
 
 junk may be given a symbol denoting the type of data to be returned. Currently
-`:int` and `:bool` are the only supported types. `junk :bool` merely returns
-true or false; `junk :int` is much more complicated and interesting.
+`:state`, `:int`, and `:bool` are the only supported types. `junk :bool` merely returns
+true or false; `junk :int` is much more complicated and interesting; `junk :state`
+returns the junk state.
 
 ```ruby
 junk :bool # Boring. Well, 50% chance of boring.
@@ -160,6 +161,10 @@ same exact range:
 ```ruby
 # Don't do this - size argument is redundant
 junk :int, size: 3, min: 125, max: 440 # 125-440. size is now redundant.
+```
+
+```ruby
+junk :state # returns 'MI'
 ```
 
 ### Array / Enumerable
