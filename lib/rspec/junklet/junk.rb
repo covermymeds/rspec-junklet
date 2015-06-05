@@ -1,4 +1,5 @@
 require_relative 'formatter'
+require 'securerandom'
 
 module RSpec
   module Junklet
@@ -117,6 +118,8 @@ module RSpec
             generator = -> { rand(max-min) + min }
           when :bool
             generator = -> { [true, false].sample }
+          when :url
+            generator = -> { "http://#{::SecureRandom.uuid}.com" }
           when Array, Enumerable
             generator = -> { type.to_a.sample }
           when Proc
@@ -136,7 +139,7 @@ module RSpec
           # junk. Get (size+1)/2 chars, which will be correct for even
           # sizes and 1 char too many for odds, so trim off with
           # [0...size] (note three .'s to trim off final char)
-          SecureRandom.hex((size+1)/2)[0...size]
+          ::SecureRandom.hex((size+1)/2)[0...size]
         end
       end
     end

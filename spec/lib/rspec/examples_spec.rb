@@ -138,6 +138,11 @@ describe RSpec::Junklet do
       end
     end
 
+    context "with type: :url" do
+      let(:junk_url) { junk :url }
+      specify { expect { URI.parse(junk_url) }.not_to raise_error(URI::InvalidURIError) }
+    end
+
     # begin
     #   $caught_bad_junklet_error = false
     #   junklet :cheesy_bad_junklet, cheese: true
