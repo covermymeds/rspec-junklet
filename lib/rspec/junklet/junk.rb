@@ -1,4 +1,5 @@
 require_relative 'formatter'
+require 'securerandom'
 
 module RSpec
   module Junklet
@@ -117,6 +118,8 @@ module RSpec
             generator = -> { rand(max-min) + min }
           when :bool
             generator = -> { [true, false].sample }
+          when :state
+            generator = -> { 'MI' }
           when Array, Enumerable
             generator = -> { type.to_a.sample }
           when Proc

@@ -138,6 +138,11 @@ describe RSpec::Junklet do
       end
     end
 
+    context "with type: :bool" do
+      let(:junk_state) { junk :state }
+      specify { expect(junk_state).to eq('MI') }
+    end
+
     # begin
     #   $caught_bad_junklet_error = false
     #   junklet :cheesy_bad_junklet, cheese: true
