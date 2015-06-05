@@ -140,8 +140,7 @@ describe RSpec::Junklet do
 
     context "with type: :url" do
       let(:junk_url) { junk :url }
-      specify { expect { URI.parse(junk_url) }.to_not raise(URI::InvalidURIError) }
-      specify { expect(junk_url).to eq("http://garbage.dumpster") }
+      specify { expect { URI.parse(junk_url) }.not_to raise_error(URI::InvalidURIError) }
     end
 
     # begin

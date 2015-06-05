@@ -119,7 +119,7 @@ module RSpec
           when :bool
             generator = -> { [true, false].sample }
           when :url
-            generator = -> { "http://gargage.dumpster" }
+            generator = -> { "http://#{::SecureRandom.uuid}.com" }
           when Array, Enumerable
             generator = -> { type.to_a.sample }
           when Proc
