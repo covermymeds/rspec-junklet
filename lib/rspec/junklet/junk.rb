@@ -3,6 +3,7 @@ require_relative 'formatter'
 module RSpec
   module Junklet
     module Junk
+      PRNG = Random.new
       def junk(*args)
         # TODO: It's long past time to extract this....
 
@@ -114,7 +115,7 @@ module RSpec
 
             min,max = max,min if min>max
 
-            generator = -> { rand(max-min) + min }
+            generator = -> { PRNG.rand(max-min) + min }
           when :bool
             generator = -> { [true, false].sample }
           when Array, Enumerable
@@ -131,12 +132,11 @@ module RSpec
           val
         else
           size = args.first.is_a?(Numeric) ? args.first : 32
-          # hex returns size*2 digits, because it returns a 0..255 byte
-          # as a hex pair. But when we want junt, we want *bytes* of
-          # junk. Get (size+1)/2 chars, which will be correct for even
-          # sizes and 1 char too many for odds, so trim off with
-          # [0...size] (note three .'s to trim off final char)
-          SecureRandom.hex((size+1)/2)[0...size]
+          # Random#bytes encoded as Base64 will be about 1.5 times longer than
+          # needed. We trim it down to the requested length. (This also removes
+          # the newline and any equal signs used to pad the end of the Base64
+          # data.
+          [PRNG.bytes(size)].pack('m')[0...size]
         end
       end
     end

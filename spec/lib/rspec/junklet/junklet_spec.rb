@@ -1,3 +1,4 @@
+require 'spec_helper'
 require PROJECT_ROOT + 'lib/rspec/junklet/junklet'
 
 class JunkletSpy
