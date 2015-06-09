@@ -9,9 +9,9 @@ end
 
 describe JunkSpy do
   let(:junk) { subject.junk }
-  let(:hex_regex) { /^[0-9a-f]+$/ }
+  let(:base64_regex) { %r(\A[0-9a-z+/]+\z)i }
 
-  specify { expect(junk).to match(hex_regex) }
+  specify { expect(junk).to match(base64_regex) }
   specify { expect(junk.size).to eq(32) }
 
   specify "it is random each time" do
@@ -21,7 +21,7 @@ describe JunkSpy do
   describe "#junk(size)" do
     let(:junk) { subject.junk 14 }
 
-    specify { expect(junk).to match(hex_regex) }
+    specify { expect(junk).to match(base64_regex) }
     specify { expect(junk.size).to eq(14) }
   end
 

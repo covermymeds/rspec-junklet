@@ -95,15 +95,11 @@ hex string 32 bytes long.
 
 ### integer
 
-Give junk an integer argument and it will return that many hexadecimal digits of
-junk data. Note that this is HALF the number of digits returned if you were to
-call `SecureRandom.hex(n)`, because `hex(n)` returns n _bytes_, each of which
-requires two hex digits to represent. Since we're more concerned about specific
-byte lengths, `junk(n)` gives you n digits, not n*2 digits representing n bytes.
-
+Give junk an integer argument and it will return that many characters of Base64
+encoded junk data.
 
 ```ruby
-junk 17 - return 17 bytes of junk data
+junk 17 - return a String of junk data with length 17
 ```
 
 ### symbol
